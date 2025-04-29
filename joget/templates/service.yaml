@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: joget
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: http
+      port: {{ .Values.service.portHttp }}
+      targetPort: {{ .Values.service.portHttp }}
+      nodePort: {{ .Values.service.nodePortHttp }}
+    - name: https
+      port: {{ .Values.service.portHttps }}
+      targetPort: {{ .Values.service.portHttps }}
+  selector:
+    app: joget
+  sessionAffinity: ClientIP
+

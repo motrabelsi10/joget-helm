@@ -1,0 +1,11 @@
+mysqlRootPassword: root
+mysqlUser: tomcat
+mysqlPassword: tomcat
+mysqlDatabase: jwdb
+nodeSelector:
+  kubernetes.io/hostname: worker2
+storage: 2Gi
+nfs:
+  server: 192.168.193.141
+  path: /exports/mysql
+

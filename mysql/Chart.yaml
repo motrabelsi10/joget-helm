@@ -1,0 +1,6 @@
+apiVersion: v2
+name: mysql
+description: MySQL with Joget Init
+version: 0.1.0
+appVersion: "8"
+

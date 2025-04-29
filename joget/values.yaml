@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: motrabelsi10/joget-wevioo-k8s
+  tag: latest
+  pullPolicy: Always
+
+nfs:
+  server: 192.168.193.141
+  path: /exports/joget
+
+mysql:
+  host: 10.36.1.69
+  database: jwdb
+  username: tomcat
+  password: tomcat
+
+service:
+  type: NodePort
+  portHttp: 8080
+  portHttps: 9080
+  nodePortHttp: 32325
+
+nodeSelector:
+  kubernetes.io/hostname: worker1
+

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joget
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: joget
+  template:
+    metadata:
+      labels:
+        app: joget
+    spec:
+      serviceAccountName: default
+      nodeSelector:
+        {{- toYaml .Values.nodeSelector | nindent 8 }}
+      securityContext:
+        runAsUser: 1000
+        fsGroup: 0
+      volumes:
+        - name: joget-storage
+          persistentVolumeClaim:
+            claimName: joget-pvc
+      containers:
+        - name: joget
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.portHttp }}
+          volumeMounts:
+            - name: joget-storage
+              mountPath: /opt/joget/wflow
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: DB_JDBC_URL
+              value: "jdbc:mysql://{{ .Values.mysql.host }}:3306/{{ .Values.mysql.database }}"
+            - name: DB_JDBC_USER
+              value: "{{ .Values.mysql.username }}"
+            - name: DB_JDBC_PASSWORD
+              value: "{{ .Values.mysql.password }}"
+            - name: TOMCAT_SESSION_JDBC_URL
+              value: "jdbc:mysql://{{ .Values.mysql.host }}:3306/tomcat?user={{ .Values.mysql.username }}&password={{ .Values.mysql.password }}"
+            - name: DB_JDBC_DRIVER
+              value: "com.mysql.cj.jdbc.Driver"
+
