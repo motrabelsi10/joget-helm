@@ -7,7 +7,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/PFE-WEVIOO/gitops-configuration.git
+    repoURL: https://github.com/motrabelsi10/joget-helm.git
     targetRevision: HEAD
     path: mysql
     helm:
@@ -16,7 +16,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: joget-helm
+    namespace: joget
 
   syncPolicy:
     automated:
