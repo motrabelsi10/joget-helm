@@ -1,0 +1,12 @@
+image:
+  repository: postgres
+  tag: "15"
+
+storage: 2Gi
+
+postgresUser: tomcat
+postgresPassword: tomcat
+postgresDb: jwdb
+
+nodeSelector:
+  kubernetes.io/hostname: k8s-worker2

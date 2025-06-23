@@ -1,16 +1,12 @@
 replicaCount: 1
 
 image:
-  repository: motrabelsi10/joget-wevioo-k8s
+  repository: motrabelsi10/joget-v7
   tag: latest
   pullPolicy: Always
 
-nfs:
-  server: 192.168.193.141
-  path: /exports/joget
-
 mysql:
-  host: 10.36.1.69
+  host: mysql.joget.svc.cluster.local
   database: jwdb
   username: tomcat
   password: tomcat
@@ -22,5 +18,21 @@ service:
   nodePortHttp: 32325
 
 nodeSelector:
-  kubernetes.io/hostname: worker1
+  kubernetes.io/hostname: k8s-worker1
 
+ingress:
+  enabled: false
+  className: nginx
+  hosts:
+    - host: joget.local
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: jogetapp.local
+      paths:
+        - path: /
+          pathType: Prefix
+    - host: d60d-165-51-8-92.ngrok-free.app
+      paths:
+        - path: /
+          pathType: Prefix
