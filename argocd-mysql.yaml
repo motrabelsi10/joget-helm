@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mysql-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/PFE-WEVIOO/gitops-configuration.git
+    targetRevision: HEAD
+    path: mysql
+    helm:
+      valueFiles:
+        - values.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: joget-helm
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -6,8 +6,16 @@ spec:
   capacity:
     storage: 2Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    server: {{ .Values.nfs.server }}
-    path: {{ .Values.nfs.path }}
+  hostPath:
+    path: "/mnt/data/joget"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8s-worker1
+
