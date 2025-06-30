@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: https://github.com/motrabelsi10/joget-helm.git
-    targetRevision: HEAD
+    targetRevision: main  # ← HEAD fonctionne aussi, mais 'main' est plus clair ici
     path: mysql
     helm:
       valueFiles:
@@ -16,7 +16,7 @@ spec:
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: joget
+    namespace: joget  # ← doit correspondre au namespace réel
 
   syncPolicy:
     automated:
@@ -24,3 +24,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+
