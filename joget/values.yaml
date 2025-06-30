@@ -6,7 +6,7 @@ image:
   pullPolicy: Always
 
 mysql:
-  host: mysql.joget.svc.cluster.local
+  host: 10.101.166.55
   database: jwdb
   username: tomcat
   password: tomcat
