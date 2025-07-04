@@ -1,0 +1,9 @@
+dependencies:
+- name: joget
+  repository: file://../joget
+  version: 0.1.0
+- name: mysql
+  repository: file://../mysql
+  version: 0.1.0
+digest: sha256:3adf58d47a69b32e28b4cc6009f60f719ae7991859bd02bd51e2f2df2bc073cb
+generated: "2025-07-04T11:14:13.304818577Z"
